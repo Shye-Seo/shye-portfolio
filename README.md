@@ -93,3 +93,13 @@ docs/DESIGN-REFERENCE.md  chatis.kr 분석 노트 (토큰·인터랙션 값)
 - 라이브 데모 화면 캡처는 `shye-seo.github.io`의 실제 배포 화면입니다.
 - 폰트 Paperlogy는 눈누(projectnoonnu) 배포본이며 상업적 사용이 허용된 무료 폰트입니다.
   재배포 시에는 원 배포처 표기를 유지해 주세요.
+
+## 7. 화면 기록
+
+`docs/screenshots/` 에 최종 렌더 결과를 남겨 두었습니다.
+
+- `desktop-hero.jpg` — 데스크톱 1440×900 히어로
+- `desktop-full.jpg` — 데스크톱 전체 페이지
+- `desktop-project.jpg` — 프로젝트 섹션
+- `mobile-full.jpg` — 모바일 390×844 전체 페이지
+- `reference-chatis-hero.jpg` — 레퍼런스(chatis.kr) 비교용 캡처

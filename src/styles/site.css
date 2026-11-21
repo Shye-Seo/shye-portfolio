@@ -1055,9 +1055,13 @@ button {
 
 .work__row {
   display: grid;
-  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
   gap: clamp(2rem, 5vw, 4.5rem);
   align-items: center;
+}
+
+.work__row--flip {
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
 }
 
 .work__row--flip .work__media {
@@ -1533,10 +1537,6 @@ button {
   line-height: 1.32;
 }
 
-.side__title .accent {
-  background-image: none;
-}
-
 .side__body {
   margin-top: 0.9rem;
   color: var(--muted);
@@ -1860,6 +1860,7 @@ button {
     gap: 2rem;
   }
 
+  .work__row .work__media,
   .work__row--flip .work__media {
     order: 0;
   }
