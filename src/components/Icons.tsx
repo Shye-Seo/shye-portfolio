@@ -50,6 +50,15 @@ export function IconGithub({ size = 17, ...props }: IconProps & { size?: number 
   );
 }
 
+export function IconMail({ size = 15, ...props }: IconProps & { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 16 16" fill="none" aria-hidden="true" {...props}>
+      <rect x="2" y="3.4" width="12" height="9.2" rx="1.2" stroke="currentColor" strokeWidth="1.3" />
+      <path d="m2.6 4.2 5.4 4 5.4-4" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
 export function IconInfo({ size = 14, ...props }: IconProps & { size?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 16 16" fill="none" aria-hidden="true" {...props}>

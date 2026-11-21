@@ -1,32 +1,26 @@
+import { useState } from 'react';
 import './styles/site.css';
+import { PROJECTS } from './content';
 import { Nav } from './components/Nav';
-import { Hero } from './components/Hero';
-import { TechStrip } from './components/TechStrip';
-import { RoleSection } from './components/RoleSection';
-import { ProcessSection } from './components/ProcessSection';
-import { WorkSection } from './components/WorkSection';
-import { ProofSection } from './components/ProofSection';
-import { StackSection } from './components/StackSection';
-import { FaqSection } from './components/FaqSection';
-import { ContactSection, Footer } from './components/ContactSection';
+import { Opening } from './components/Opening';
+import { CaseWorkspace } from './components/CaseWorkspace';
+import { Bento } from './components/Bento';
+import { Contact, Footer } from './components/Contact';
 
 export default function App() {
+  const [activeCase, setActiveCase] = useState<string | null>(PROJECTS[0].id);
+
   return (
     <>
-      <a className="skip-link" href="#work">
+      <a className="skip" href="#work">
         프로젝트로 바로 가기
       </a>
       <Nav />
       <main>
-        <Hero />
-        <TechStrip />
-        <RoleSection />
-        <ProcessSection />
-        <WorkSection />
-        <ProofSection />
-        <StackSection />
-        <FaqSection />
-        <ContactSection />
+        <Opening onSelect={setActiveCase} />
+        <CaseWorkspace activeId={activeCase} onChange={setActiveCase} />
+        <Bento />
+        <Contact />
       </main>
       <Footer />
     </>
