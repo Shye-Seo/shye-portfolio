@@ -1,18 +1,19 @@
-// 포트폴리오 검증 + 화면 기록 — 밝은 고가독성 팔레트(v4)
+// 포트폴리오 검증 + 화면 기록 — 밝은 버터·앰버 팔레트(v5)
 //
-// 실행 (작업 환경 기준):
+// 실행 (이 작업 환경 기준):
 //   export PATH=/workspace/tools/node/bin:$PATH
-//   export LD_LIBRARY_PATH=/workspace/tmp/atkroot/usr/lib/x86_64-linux-gnu   # chromium 헤드리스가 쓰는 atk 라이브러리
-//   node scripts/verify.mjs
+//   export LD_LIBRARY_PATH=/workspace/tmp/browserroot/lib/x86_64-linux-gnu:/workspace/tmp/browserroot/usr/lib/x86_64-linux-gnu:/workspace/tmp/atkroot/usr/lib/x86_64-linux-gnu
+//   PF_BASE=./ npm run build && PF_URL=file://$PWD/dist/index.html node scripts/verify.mjs
 // 앞의 두 줄은 이 작업 환경에만 있는 경로입니다. 다른 컴퓨터에서는 playwright를 설치해
 // 아래 import 경로만 바꾸면 됩니다. 빌드(dist)를 먼저 만들어 두어야 합니다.
+// 배포 빌드(base '/shye-portfolio/')는 PF_URL에 http://…/shye-portfolio/ 주소를 줘서 검사합니다.
 import { chromium } from '/workspace/work/commerce-seller-analytics/node_modules/@playwright/test/index.mjs';
 import { pathToFileURL } from 'node:url';
 import path from 'node:path';
 
 const ROOT = '/workspace/work/shye-portfolio';
-const URL = pathToFileURL(path.join(ROOT, 'dist/index.html')).href;
-const OUT = '/workspace/browser';
+const URL = process.env.PF_URL || pathToFileURL(path.join(ROOT, 'dist/index.html')).href;
+const OUT = process.env.PF_OUT || '/workspace/browser';
 
 const results = [];
 const ok = (name, pass, detail = '') => {
@@ -320,39 +321,39 @@ const lumOfCss = `
 // ── 6. 화면 기록
 {
   const page = await open(1440, 900);
-  await page.screenshot({ path: `${OUT}/pf-v4-desktop-opening.png` });
+  await page.screenshot({ path: `${OUT}/pf-v5-desktop-opening.png` });
 
   await page.evaluate(() => window.scrollTo(0, document.getElementById('work').offsetTop - 60));
   await page.waitForTimeout(900);
-  await page.screenshot({ path: `${OUT}/pf-v4-desktop-work.png` });
+  await page.screenshot({ path: `${OUT}/pf-v5-desktop-work.png` });
 
   // 지표 카운터를 먼저 끝까지 돌린 뒤 벤토 첫 화면으로 돌아와 찍는다
   await page.evaluate(() => window.scrollTo(0, document.getElementById('approach').offsetTop + 520));
   await page.waitForTimeout(2000);
   await page.evaluate(() => window.scrollTo(0, document.getElementById('approach').offsetTop - 60));
   await page.waitForTimeout(700);
-  await page.screenshot({ path: `${OUT}/pf-v4-desktop-bento.png` });
+  await page.screenshot({ path: `${OUT}/pf-v5-desktop-bento.png` });
 
   await page.evaluate(() => window.scrollTo(0, document.getElementById('approach').offsetTop + 560));
   await page.waitForTimeout(1200);
-  await page.screenshot({ path: `${OUT}/pf-v4-desktop-bento2.png` });
+  await page.screenshot({ path: `${OUT}/pf-v5-desktop-bento2.png` });
 
   await page.evaluate(() => window.scrollTo(0, document.getElementById('contact').offsetTop - 60));
   await page.waitForTimeout(900);
-  await page.screenshot({ path: `${OUT}/pf-v4-desktop-contact.png` });
+  await page.screenshot({ path: `${OUT}/pf-v5-desktop-contact.png` });
 
   await revealAll(page);
-  await page.screenshot({ path: `${OUT}/pf-v4-desktop-full.png`, fullPage: true });
+  await page.screenshot({ path: `${OUT}/pf-v5-desktop-full.png`, fullPage: true });
   await page.close();
 }
 
 {
   const page = await open(390, 844);
   await revealAll(page);
-  await page.screenshot({ path: `${OUT}/pf-v4-mobile-full.png`, fullPage: true });
+  await page.screenshot({ path: `${OUT}/pf-v5-mobile-full.png`, fullPage: true });
   await page.evaluate(() => window.scrollTo(0, 0));
   await page.waitForTimeout(400);
-  await page.screenshot({ path: `${OUT}/pf-v4-mobile-opening.png` });
+  await page.screenshot({ path: `${OUT}/pf-v5-mobile-opening.png` });
   await page.close();
 }
 

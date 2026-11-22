@@ -2,3 +2,6 @@ node_modules
 dist
 .DS_Store
 *.log
+
+# 앱 권한 정책상 워크플로 파일은 푸시할 수 없다 — 로컬에만 둔다.
+.github/workflows/

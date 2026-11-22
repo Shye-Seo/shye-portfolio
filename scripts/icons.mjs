@@ -1,9 +1,9 @@
-// apple-touch-icon.png (180×180) — favicon.svg의 코발트 타일을 꽉 채운 판으로 렌더.
+// apple-touch-icon.png (180×180) — favicon.svg의 앰버 타일을 꽉 채운 판으로 렌더.
 // 글자는 사이트와 같은 Paperlogy 800을 data URI로 넣어 로드한다.
 //
-// 실행: export LD_LIBRARY_PATH=/workspace/tmp/atkroot/usr/lib/x86_64-linux-gnu && node scripts/icons.mjs
+// 실행: export LD_LIBRARY_PATH=/workspace/tmp/browserroot/lib/x86_64-linux-gnu:/workspace/tmp/browserroot/usr/lib/x86_64-linux-gnu:/workspace/tmp/atkroot/usr/lib/x86_64-linux-gnu && node scripts/icons.mjs
 // (playwright import 경로와 LD_LIBRARY_PATH는 이 작업 환경 기준)
-import { chromium } from '/workspace/commerce-seller-analytics/node_modules/@playwright/test/index.mjs';
+import { chromium } from '/workspace/work/commerce-seller-analytics/node_modules/@playwright/test/index.mjs';
 import fs from 'node:fs';
 
 const b64 = fs
@@ -12,11 +12,11 @@ const b64 = fs
 
 const html = `<!doctype html><html><head><meta charset="utf-8"><style>
 @font-face{font-family:'Paperlogy';src:url(data:font/woff2;base64,${b64}) format('woff2');font-weight:800;font-display:block}
-html,body{margin:0;width:180px;height:180px;overflow:hidden;background:#2f54eb}
-.tile{position:relative;width:180px;height:180px;background:#2f54eb}
+html,body{margin:0;width:180px;height:180px;overflow:hidden;background:#b45309}
+.tile{position:relative;width:180px;height:180px;background:#b45309}
 .mark{position:absolute;left:0;top:0;width:180px;height:180px;display:flex;align-items:center;justify-content:center;
-  font-family:'Paperlogy', monospace;font-weight:800;font-size:122px;line-height:1;color:#fff;letter-spacing:-4px;transform:translate(-7px,3px)}
-.dot{position:absolute;left:127px;top:117px;width:24px;height:24px;border-radius:50%;background:#a7ecf7}
+  font-family:'Paperlogy', monospace;font-weight:800;font-size:122px;line-height:1;color:#fffdf8;letter-spacing:-4px;transform:translate(-7px,3px)}
+.dot{position:absolute;left:127px;top:117px;width:24px;height:24px;border-radius:50%;background:#fde68a}
 </style></head><body><div class="tile"><span class="mark">s</span><span class="dot"></span></div></body></html>`;
 
 const browser = await chromium.launch({

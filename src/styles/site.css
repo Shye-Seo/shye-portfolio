@@ -28,46 +28,65 @@
 }
 
 /* ═══════════════════════════════════════════════════════════════════
-   shye-portfolio — design tokens
+   shye-portfolio — design tokens (v5 · warm butter)
 
    방향: "작업 색인(working index)".
    - 회사 홈페이지의 섹션 공식(히어로 요약표 → 마퀴 → 진단 버튼 →
      단계 카드 → 교차 케이스 → 지표 그리드 → 다크 CTA)을 쓰지 않는다.
    - 표지(마스트헤드 + 에디토리얼 오프닝) 다음에 바로 펼쳐지는
      '케이스 파일 워크스페이스', 그 뒤에 한 장의 벤토.
-   - 흰 종이(#ffffff)와 쿨그레이 서피스(#f5f7fb) 위 네이비 차콜 본문,
-     포인트는 코발트 하나(#2f54eb). 어두운 바탕은 쓰지 않는다.
-   - 라틴 라벨만 모노스페이스. 카드 모서리는 2~3px.
+   - 버터 아이보리 종이(#faf7f0)와 따뜻한 샌드 서피스(#f3ede0) 위
+     딥 차콜 본문, 포인트는 딥 앰버 하나(#b45309)와 하이라이트(#fde68a).
+     어두운 바탕은 쓰지 않는다.
+   - 간격은 4px 격자(--sp-1 … --sp-10), 구획은 1px 헤어라인, 그림자 없음.
+   - 라틴 라벨만 모노스페이스. 카드 모서리는 2px.
    ═══════════════════════════════════════════════════════════════════ */
 
 :root {
-  --paper: #ffffff;
-  --paper-2: #f5f7fb;
-  --paper-3: #eef2f9;
-  --white: #ffffff;
+  /* ── 면 색 ─────────────────────────────────────────────────────── */
+  --paper: #faf7f0; /* 버터 아이보리 — 기본 종이 */
+  --paper-2: #f3ede0; /* 샌드 — 바탕을 한 번 뒤집는 섹션 */
+  --paper-3: #efe6d5; /* 호버 틴트 */
+  --white: #fffdf8; /* 카드·패널 */
 
-  /* 선택된 케이스 줄·순환 도식 칸에 쓰는 인디고 틴트 */
-  --surface: #ecf1fe;
-  --surface-ink: #111827;
-  --surface-muted: #4b5670;
-  --surface-line: #d3defb;
-  --surface-rule: #b9caf9;
+  /* 선택된 케이스 줄·순환 도식 칸에 쓰는 앰버 틴트 */
+  --surface: #f8ead0;
+  --surface-ink: #1c1917;
+  --surface-muted: #5c4b34;
+  --surface-line: #ebd9b4;
+  --surface-rule: #dcc79a;
 
-  --ink: #111827;
-  --text: #333d4e;
-  --muted: #59637a;
+  /* ── 글자색 ────────────────────────────────────────────────────── */
+  --ink: #1c1917; /* 딥 차콜 — 제목 */
+  --text: #3d352c; /* 본문 */
+  --muted: #57534e; /* 보조 문장·모노 라벨 */
 
-  --line: #dce3f0;
-  --line-soft: #e9eef7;
-  --line-strong: #c0c9da;
+  /* ── 헤어라인 3단 ──────────────────────────────────────────────── */
+  --line: #e6dcc8;
+  --line-soft: #efe7d8;
+  --line-strong: #d3c6ac;
 
-  --accent: #2f54eb;
-  --accent-deep: #1e3ac2;
-  --accent-strong: #2141ce;
-  --accent-soft: #e0e8fd;
-  --sky: #0a738a;
-  --warn: #a9500b;
-  --warn-soft: #fff6e9;
+  /* ── 포인트 ────────────────────────────────────────────────────── */
+  --accent: #a94d07; /* 딥 앰버 — 링크·번호·강조어·탭 밑줄·주 버튼 (5.2:1) */
+  --accent-deep: #83390a; /* 주 버튼 호버 */
+  --accent-strong: #92400e; /* 틴트 바탕 위 포인트 (6.1:1) */
+  --accent-soft: #fde68a; /* 선택 영역 */
+  --mark: #fde68a; /* 형광 하이라이트 */
+  --sky: #4f6147; /* 딥 세이지 — 상태·흐름 표시에만 */
+  --warn: #9a3412; /* ‘검증 범위’·‘검증하지 못한 경계’ */
+  --warn-soft: #fbf0e4;
+
+  /* ── 간격 4px 격자 ─────────────────────────────────────────────── */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 20px;
+  --sp-6: 24px;
+  --sp-7: 32px;
+  --sp-8: 40px;
+  --sp-9: 48px;
+  --sp-10: 64px;
 
   --font: 'Paperlogy', 'Pretendard', -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo',
     'Malgun Gothic', 'Noto Sans KR', sans-serif;
@@ -78,7 +97,7 @@
   --pad-y: clamp(4.5rem, 8vw, 7.5rem);
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
 
-  --case-pad: clamp(1rem, 2vw, 1.6rem);
+  --case-pad: clamp(1rem, 2vw, 1.5rem);
 }
 
 *,
@@ -92,7 +111,7 @@ html {
   color-scheme: light;
   overflow-x: clip;
   scroll-behavior: smooth;
-  scroll-padding-top: 72px;
+  scroll-padding-top: var(--sp-10);
 }
 
 body {
@@ -136,6 +155,11 @@ h4 {
   line-height: 1.2;
   letter-spacing: -0.032em;
   word-break: keep-all;
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
 }
 
 ul,
@@ -171,7 +195,7 @@ button {
 
 :focus-visible {
   outline: 2px solid var(--accent);
-  outline-offset: 3px;
+  outline-offset: 2px;
 }
 
 .sr-only {
@@ -200,12 +224,12 @@ button {
 
 .skip {
   position: fixed;
-  top: 10px;
-  left: 10px;
+  top: var(--sp-2);
+  left: var(--sp-2);
   z-index: 100;
-  padding: 0.7rem 1.1rem;
+  padding: var(--sp-3) 1rem;
   background: var(--accent);
-  color: #ffffff;
+  color: #fffdf8;
   font-size: 13px;
   transform: translateY(-160%);
   transition: transform 0.2s var(--ease);
@@ -243,9 +267,9 @@ button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.45rem;
-  min-height: 42px;
-  padding: 0 1.05rem;
+  gap: var(--sp-2);
+  min-height: 44px;
+  padding: 0 var(--sp-4);
   border: 1px solid transparent;
   border-radius: 2px;
   font-size: 13px;
@@ -260,7 +284,7 @@ button {
 
 .btn--solid {
   background: var(--accent);
-  color: #ffffff;
+  color: #fffdf8;
 }
 
 .btn--solid:hover {
@@ -282,9 +306,9 @@ button {
   position: fixed;
   inset: 0 0 auto;
   z-index: 50;
-  background: rgba(255, 255, 255, 0.92);
+  background: rgba(250, 247, 240, 0.9);
   border-bottom: 1px solid var(--line);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(12px) saturate(1.1);
   transform: translateY(-101%);
   visibility: hidden;
   transition:
@@ -300,13 +324,13 @@ button {
 .indexbar__inner {
   display: flex;
   align-items: center;
-  gap: 2rem;
-  height: 52px;
+  gap: var(--sp-6);
+  height: 56px;
 }
 
 .indexbar__brand {
   display: inline-flex;
-  gap: 0.35rem;
+  gap: var(--sp-1);
   align-items: baseline;
   font-size: 14px;
   font-weight: 800;
@@ -327,14 +351,14 @@ button {
 
 .indexbar__nav {
   display: flex;
-  gap: 1.5rem;
+  gap: var(--sp-5);
   margin-left: auto;
 }
 
 .indexbar__nav a {
   display: inline-flex;
   align-items: baseline;
-  gap: 0.35rem;
+  gap: var(--sp-1);
   padding: 0.2rem 0;
   font-size: 12.5px;
   color: var(--muted);
@@ -360,8 +384,8 @@ button {
 .indexbar__actions {
   display: flex;
   align-items: center;
-  gap: 0.9rem;
-  padding-left: 1.2rem;
+  gap: var(--sp-3);
+  padding-left: var(--sp-4);
   border-left: 1px solid var(--line);
 }
 
@@ -402,15 +426,15 @@ button {
 
 /* ─────────────────────────────  folio  ───────────────────────────── */
 .folio {
-  padding-top: 1.15rem;
+  padding-top: var(--sp-4);
 }
 
 .folio__row {
   display: grid;
   grid-template-columns: 1fr auto auto auto;
   align-items: baseline;
-  gap: 1.6rem;
-  padding-bottom: 1rem;
+  gap: var(--sp-6);
+  padding-bottom: var(--sp-4);
   border-bottom: 1px solid var(--line);
   font-size: 12px;
   color: var(--muted);
@@ -419,7 +443,7 @@ button {
 .folio__name {
   display: inline-flex;
   align-items: baseline;
-  gap: 0.4rem;
+  gap: var(--sp-2);
   font-size: 15px;
   font-weight: 800;
   color: var(--ink);
@@ -450,12 +474,13 @@ button {
   font-size: 10.5px;
   letter-spacing: 0.1em;
   color: var(--ink);
+  font-variant-numeric: tabular-nums;
 }
 
 /* ─────────────────────────────  opening  ───────────────────────────── */
 .opening {
   position: relative;
-  padding: clamp(3.2rem, 6.5vw, 6rem) 0 0;
+  padding: clamp(3rem, 6.5vw, 6rem) 0 0;
 }
 
 .opening__grid {
@@ -469,7 +494,7 @@ button {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.9rem;
+  gap: var(--sp-3);
   min-height: 100%;
 }
 
@@ -500,7 +525,7 @@ button {
 .opening__kicker {
   display: flex;
   align-items: center;
-  gap: 0.9rem;
+  gap: var(--sp-3);
   font-family: var(--mono);
   font-size: 10.5px;
   letter-spacing: 0.16em;
@@ -516,7 +541,7 @@ button {
 }
 
 .opening__title {
-  margin-top: clamp(1.4rem, 3vw, 2.2rem);
+  margin-top: clamp(1.5rem, 3vw, 2rem);
   font-size: clamp(2.55rem, 6vw, 5.1rem);
   line-height: 1.04;
   letter-spacing: -0.052em;
@@ -533,8 +558,8 @@ button {
 
 .opening__aside {
   align-self: start;
-  padding-top: clamp(0.6rem, 3.6vw, 4.4rem);
-  padding-left: clamp(1.1rem, 2.4vw, 2rem);
+  padding-top: clamp(0.5rem, 3.6vw, 4rem);
+  padding-left: clamp(1rem, 2.5vw, 2rem);
   border-left: 1px solid var(--line);
 }
 
@@ -545,13 +570,13 @@ button {
 }
 
 .index {
-  margin-top: clamp(1.6rem, 3vw, 2.4rem);
+  margin-top: clamp(1.5rem, 3vw, 2.5rem);
 }
 
 .index__head {
   display: flex;
   justify-content: space-between;
-  padding-bottom: 0.55rem;
+  padding-bottom: var(--sp-2);
   border-bottom: 1px solid var(--line-strong);
   font-family: var(--mono);
   font-size: 9.5px;
@@ -562,10 +587,10 @@ button {
 
 .index__item {
   display: grid;
-  grid-template-columns: 26px minmax(0, 1fr) auto 14px;
+  grid-template-columns: 24px minmax(0, 1fr) auto 14px;
   align-items: baseline;
-  gap: 0.55rem;
-  padding: 0.72rem 0;
+  gap: var(--sp-2);
+  padding: var(--sp-3) 0;
   border-bottom: 1px solid var(--line-soft);
   transition:
     color 0.2s,
@@ -574,7 +599,7 @@ button {
 
 .index__item:hover {
   color: var(--accent);
-  padding-left: 0.25rem;
+  padding-left: var(--sp-1);
 }
 
 .index__no {
@@ -594,10 +619,11 @@ button {
   font-size: 9.5px;
   color: var(--muted);
   white-space: nowrap;
+  font-variant-numeric: tabular-nums;
 }
 
 .opening__note {
-  margin-top: 1.1rem;
+  margin-top: var(--sp-4);
   font-size: 11.5px;
   line-height: 1.65;
   color: var(--muted);
@@ -607,9 +633,9 @@ button {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1.6rem;
-  margin-top: clamp(2.6rem, 5vw, 4.4rem);
-  padding: 1rem 0 1.25rem;
+  gap: var(--sp-6);
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+  padding: var(--sp-4) 0 var(--sp-5);
   border-top: 1px solid var(--line-strong);
 }
 
@@ -617,14 +643,14 @@ button {
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
-  gap: 0.4rem 0;
+  gap: var(--sp-2) 0;
   font-size: 12px;
   color: var(--muted);
 }
 
 .facts li + li {
-  padding-left: 1.2rem;
-  margin-left: 1.2rem;
+  padding-left: var(--sp-5);
+  margin-left: var(--sp-5);
   border-left: 1px solid var(--line);
 }
 
@@ -632,14 +658,14 @@ button {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 1.3rem;
+  gap: var(--sp-5);
   font-size: 12px;
 }
 
 .opening__scroll {
   display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
+  gap: var(--sp-1);
   font-weight: 700;
   color: var(--accent);
 }
@@ -648,7 +674,7 @@ button {
 .opening__mail {
   display: inline-flex;
   align-items: center;
-  gap: 0.3rem;
+  gap: var(--sp-1);
   color: var(--muted);
   transition: color 0.2s;
 }
@@ -665,17 +691,17 @@ button {
 
 /* ─────────────────────────────  section head  ───────────────────────────── */
 .shead {
-  padding-top: 1rem;
+  padding-top: var(--sp-4);
   border-top: 1px solid var(--ink);
-  margin-bottom: clamp(2.4rem, 4.5vw, 4rem);
+  margin-bottom: clamp(2.5rem, 4.5vw, 4rem);
 }
 
 .shead__label,
 .contact__label {
   display: flex;
   align-items: center;
-  gap: 0.8rem;
-  margin-bottom: clamp(1.6rem, 3.4vw, 2.8rem);
+  gap: var(--sp-2);
+  margin-bottom: clamp(1.5rem, 3.5vw, 3rem);
   font-family: var(--mono);
   font-size: 10px;
   letter-spacing: 0.16em;
@@ -690,7 +716,7 @@ button {
 }
 
 .shead__rule {
-  width: 54px;
+  width: 56px;
   height: 1px;
   background: var(--line-strong);
 }
@@ -739,11 +765,11 @@ button {
 .case__btn {
   position: relative;
   display: grid;
-  grid-template-columns: 50px minmax(0, 1.4fr) minmax(0, 1fr) 88px 26px;
+  grid-template-columns: 48px minmax(0, 1.4fr) minmax(0, 1fr) 88px 24px;
   align-items: center;
-  gap: 1.1rem;
+  gap: var(--sp-4);
   width: 100%;
-  padding: clamp(1.15rem, 2.3vw, 1.65rem) var(--case-pad);
+  padding: clamp(1rem, 2.5vw, 1.5rem) var(--case-pad);
   border: 0;
   background: transparent;
   text-align: left;
@@ -815,6 +841,7 @@ button {
   color: var(--muted);
   text-align: right;
   white-space: nowrap;
+  font-variant-numeric: tabular-nums;
 }
 
 .case.is-open .case__kicker,
@@ -858,8 +885,8 @@ button {
 .casepanel__grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(300px, 400px);
-  gap: clamp(1.8rem, 4vw, 3.4rem);
-  padding: clamp(1.6rem, 3.2vw, 2.8rem) var(--case-pad) clamp(1.8rem, 3.4vw, 3rem);
+  gap: clamp(1.5rem, 4vw, 3.5rem);
+  padding: clamp(1.5rem, 3vw, 3rem) var(--case-pad) clamp(2rem, 3.5vw, 3rem);
 }
 
 .casepanel__meta {
@@ -871,7 +898,7 @@ button {
 }
 
 .casepanel__title {
-  margin-top: 0.9rem;
+  margin-top: var(--sp-3);
   font-size: clamp(1.4rem, 2.4vw, 1.95rem);
   line-height: 1.24;
   letter-spacing: -0.04em;
@@ -887,15 +914,15 @@ button {
 /* tabs */
 .tabs {
   display: flex;
-  gap: 0.2rem;
-  margin-top: clamp(1.4rem, 2.6vw, 2rem);
+  gap: var(--sp-1);
+  margin-top: clamp(1.5rem, 2.5vw, 2rem);
   border-bottom: 1px solid var(--line);
 }
 
 .tab {
   position: relative;
   margin-bottom: -1px;
-  padding: 0.55rem 0.85rem 0.6rem;
+  padding: var(--sp-2) var(--sp-3);
   border: 0;
   border-bottom: 2px solid transparent;
   background: transparent;
@@ -924,7 +951,7 @@ button {
 
 .tabpanel {
   min-height: 232px;
-  padding-top: 1.15rem;
+  padding-top: var(--sp-4);
 }
 
 .tabpanel__inner {
@@ -948,9 +975,9 @@ button {
 
 .points__item {
   display: grid;
-  grid-template-columns: 26px minmax(0, 1fr);
-  gap: 0.7rem;
-  padding: 0.6rem 0;
+  grid-template-columns: 24px minmax(0, 1fr);
+  gap: var(--sp-3);
+  padding: var(--sp-3) 0;
   border-bottom: 1px dashed var(--line-soft);
   font-size: 13px;
   line-height: 1.72;
@@ -964,12 +991,12 @@ button {
   font-family: var(--mono);
   font-size: 9.5px;
   color: var(--accent);
-  padding-top: 0.35rem;
+  padding-top: var(--sp-1);
 }
 
 .scopenote {
-  margin-top: 1.1rem;
-  padding: 0.75rem 0.9rem;
+  margin-top: var(--sp-4);
+  padding: var(--sp-3) var(--sp-4);
   border-left: 2px solid var(--warn);
   background: var(--warn-soft);
   font-size: 12px;
@@ -993,10 +1020,10 @@ button {
 
 .arch__step {
   display: grid;
-  grid-template-columns: 30px 82px minmax(0, 1fr);
-  gap: 0.8rem;
+  grid-template-columns: 32px 80px minmax(0, 1fr);
+  gap: var(--sp-3);
   align-items: baseline;
-  padding: 0.62rem 0;
+  padding: var(--sp-3) 0;
   border-bottom: 1px dashed var(--line-soft);
 }
 
@@ -1024,11 +1051,11 @@ button {
 
 .troubles {
   display: grid;
-  gap: 0.9rem;
+  gap: var(--sp-4);
 }
 
 .trouble {
-  padding-bottom: 0.9rem;
+  padding-bottom: var(--sp-4);
   border-bottom: 1px dashed var(--line-soft);
 }
 
@@ -1041,7 +1068,7 @@ button {
 .trouble__a {
   display: grid;
   grid-template-columns: 34px minmax(0, 1fr);
-  gap: 0.6rem;
+  gap: var(--sp-2);
   font-size: 12.5px;
   line-height: 1.7;
 }
@@ -1052,7 +1079,7 @@ button {
 }
 
 .trouble__a {
-  margin-top: 0.35rem;
+  margin-top: var(--sp-1);
   color: var(--muted);
 }
 
@@ -1063,7 +1090,7 @@ button {
   font-weight: 400;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  padding-top: 0.3rem;
+  padding-top: var(--sp-1);
 }
 
 .trouble__q span {
@@ -1083,7 +1110,7 @@ button {
 .plate {
   border: 1px solid var(--line-strong);
   background: var(--paper-2);
-  padding: 9px;
+  padding: var(--sp-2);
 }
 
 .plate img {
@@ -1098,8 +1125,8 @@ button {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  gap: 0.8rem;
-  margin-top: 0.55rem;
+  gap: var(--sp-2);
+  margin-top: var(--sp-2);
   font-family: var(--mono);
   font-size: 9px;
   letter-spacing: 0.06em;
@@ -1111,15 +1138,15 @@ button {
 }
 
 .spec {
-  margin-top: 1.2rem;
+  margin-top: var(--sp-5);
   border-top: 1px solid var(--line-strong);
 }
 
 .spec__row {
   display: grid;
   grid-template-columns: 52px minmax(0, 1fr);
-  gap: 0.8rem;
-  padding: 0.62rem 0;
+  gap: var(--sp-3);
+  padding: var(--sp-3) 0;
   border-bottom: 1px solid var(--line-soft);
 }
 
@@ -1141,18 +1168,18 @@ button {
 .casepanel__actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-top: 1.2rem;
+  gap: var(--sp-2);
+  margin-top: var(--sp-5);
 }
 
 .casepanel__actions .btn {
   min-height: 38px;
   font-size: 12px;
-  padding: 0 0.9rem;
+  padding: 0 var(--sp-3);
 }
 
 .work__foot {
-  margin-top: 1.2rem;
+  margin-top: var(--sp-5);
   font-size: 11.5px;
   line-height: 1.7;
   color: var(--muted);
@@ -1169,14 +1196,14 @@ button {
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
   grid-auto-rows: minmax(150px, auto);
-  gap: 9px;
+  gap: var(--sp-2);
 }
 
 .bcell {
   position: relative;
   display: flex;
   flex-direction: column;
-  padding: clamp(1.1rem, 2vw, 1.6rem);
+  padding: clamp(1rem, 2vw, 1.5rem);
   border: 1px solid var(--line);
   background: var(--white);
 }
@@ -1198,7 +1225,7 @@ button {
 }
 
 .bcell__title {
-  margin-top: 0.7rem;
+  margin-top: var(--sp-3);
   font-size: 17px;
   letter-spacing: -0.03em;
 }
@@ -1243,14 +1270,14 @@ button {
 
 /* loop diagram */
 .loop__title {
-  margin-top: 0.8rem;
+  margin-top: var(--sp-2);
   font-size: clamp(1.5rem, 2.4vw, 2rem);
   color: var(--surface-ink);
   letter-spacing: -0.04em;
 }
 
 .loop__body {
-  margin-top: 0.6rem;
+  margin-top: var(--sp-2);
   font-size: 12.5px;
   line-height: 1.72;
   color: var(--surface-muted);
@@ -1259,17 +1286,17 @@ button {
 
 .loop {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 42px minmax(0, 1fr);
-  grid-template-rows: auto 42px auto;
-  gap: 7px;
+  grid-template-columns: minmax(0, 1fr) 40px minmax(0, 1fr);
+  grid-template-rows: auto 40px auto;
+  gap: var(--sp-2);
   margin: auto 0 0;
-  padding-top: clamp(1.2rem, 2.4vw, 1.8rem);
+  padding-top: clamp(1.5rem, 2.5vw, 2rem);
 }
 
 .loop__step {
-  padding: 0.7rem 0.8rem;
+  padding: var(--sp-3);
   border: 1px solid var(--surface-line);
-  background: #ffffff;
+  background: var(--white);
 }
 
 .loop__step span {
@@ -1289,7 +1316,7 @@ button {
 
 .loop__step em {
   display: block;
-  margin-top: 0.3rem;
+  margin-top: var(--sp-1);
   font-style: normal;
   font-size: 10.5px;
   line-height: 1.55;
@@ -1382,7 +1409,7 @@ button {
 }
 
 .loop__foot {
-  margin-top: 1.1rem;
+  margin-top: var(--sp-4);
   font-size: 11.5px;
   line-height: 1.68;
   color: var(--surface-muted);
@@ -1394,7 +1421,7 @@ button {
   display: flex;
   align-items: baseline;
   gap: 0.1rem;
-  margin-top: 1.1rem;
+  margin-top: var(--sp-4);
   font-size: clamp(2.5rem, 4.6vw, 4rem);
   font-weight: 800;
   line-height: 1;
@@ -1411,7 +1438,7 @@ button {
 }
 
 .metric__title {
-  margin-top: 0.55rem;
+  margin-top: var(--sp-2);
   font-size: 13px;
   font-weight: 700;
   color: var(--ink);
@@ -1419,7 +1446,7 @@ button {
 
 .metric__note {
   margin-top: auto;
-  padding-top: 0.9rem;
+  padding-top: var(--sp-3);
   font-size: 11px;
   line-height: 1.55;
   color: var(--muted);
@@ -1427,15 +1454,15 @@ button {
 
 .breakdown {
   display: grid;
-  gap: 0.42rem;
-  margin-top: 1.2rem;
+  gap: var(--sp-2);
+  margin-top: var(--sp-5);
 }
 
 .breakdown__row {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   align-items: baseline;
-  column-gap: 0.6rem;
+  column-gap: var(--sp-2);
 }
 
 .breakdown__name {
@@ -1447,12 +1474,13 @@ button {
   font-family: var(--mono);
   font-size: 10px;
   color: var(--muted);
+  font-variant-numeric: tabular-nums;
 }
 
 .breakdown__bar {
   grid-column: 1 / -1;
   height: 2px;
-  margin-top: 0.2rem;
+  margin-top: var(--sp-1);
   background: var(--line-soft);
 }
 
@@ -1466,13 +1494,13 @@ button {
 .stackgrid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1.7rem 2rem;
-  margin-top: 1.4rem;
+  gap: var(--sp-6) var(--sp-7);
+  margin-top: var(--sp-5);
 }
 
 .stack__principle {
   margin-top: auto;
-  padding-top: 1.1rem;
+  padding-top: var(--sp-4);
   border-top: 1px dashed var(--line);
   font-size: 11.5px;
   line-height: 1.72;
@@ -1481,7 +1509,7 @@ button {
 }
 
 .stack__note {
-  margin-top: 0.8rem;
+  margin-top: var(--sp-2);
   padding-top: 0;
   font-size: 11px;
   line-height: 1.6;
@@ -1523,24 +1551,24 @@ button {
   display: flex;
   flex-direction: column;
   flex: 1;
-  padding: 0.95rem 1.15rem 1.15rem;
+  padding: var(--sp-4);
 }
 
 .side__name {
-  margin-top: 0.35rem;
+  margin-top: var(--sp-1);
   font-size: 17px;
   letter-spacing: -0.03em;
 }
 
 .side__desc {
-  margin-top: 0.4rem;
+  margin-top: var(--sp-2);
   font-size: 11.5px;
   line-height: 1.62;
   color: var(--muted);
 }
 
 .side__meta {
-  margin-top: 0.5rem;
+  margin-top: var(--sp-2);
   font-family: var(--mono);
   font-size: 9px;
   letter-spacing: 0.04em;
@@ -1549,9 +1577,9 @@ button {
 
 .side__links {
   display: flex;
-  gap: 1rem;
+  gap: var(--sp-4);
   margin-top: auto;
-  padding-top: 0.75rem;
+  padding-top: var(--sp-3);
 }
 
 .side__links a {
@@ -1567,9 +1595,9 @@ button {
 .boundary {
   display: grid;
   grid-template-columns: minmax(0, 250px) minmax(0, 1fr) minmax(0, 230px);
-  gap: clamp(1.2rem, 3vw, 2.6rem);
+  gap: clamp(1.5rem, 3vw, 2.5rem);
   align-items: start;
-  margin-top: 0.9rem;
+  margin-top: var(--sp-3);
 }
 
 .boundary__title {
@@ -1581,12 +1609,12 @@ button {
 .boundary__list {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 0.35rem 1.4rem;
+  gap: var(--sp-2) var(--sp-6);
 }
 
 .boundary__list li {
   position: relative;
-  padding-left: 0.95rem;
+  padding-left: var(--sp-4);
   font-size: 11.5px;
   line-height: 1.6;
   color: var(--text);
@@ -1640,8 +1668,8 @@ button {
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 1.4rem 2rem;
-  padding: clamp(1.4rem, 3vw, 2.2rem) 0;
+  gap: var(--sp-6) var(--sp-7);
+  padding: clamp(1.5rem, 3vw, 2rem) 0;
   border-top: 1px solid var(--ink);
   border-bottom: 1px solid var(--line);
 }
@@ -1680,7 +1708,7 @@ button {
 .mailrow__actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
+  gap: var(--sp-2);
 }
 
 .contact__foot {
@@ -1688,14 +1716,14 @@ button {
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem;
-  padding-top: 1.15rem;
+  gap: var(--sp-4);
+  padding-top: var(--sp-4);
 }
 
 .contact__status {
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: var(--sp-2);
   font-size: 12px;
   color: var(--sky);
 }
@@ -1703,7 +1731,7 @@ button {
 .contact__links {
   display: flex;
   flex-wrap: wrap;
-  gap: 1.3rem;
+  gap: var(--sp-5);
 }
 
 .contact__links a {
@@ -1722,7 +1750,7 @@ button {
 /* footer */
 .footer {
   border-top: 1px solid var(--line);
-  padding: 1.2rem 0 1.8rem;
+  padding: var(--sp-5) 0 var(--sp-6);
 }
 
 .footer__row {
@@ -1730,7 +1758,7 @@ button {
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 0.8rem 1.4rem;
+  gap: var(--sp-2) var(--sp-6);
   font-family: var(--mono);
   font-size: 9.5px;
   letter-spacing: 0.04em;
@@ -1745,8 +1773,8 @@ button {
 .vd {
   display: flex;
   flex-direction: column;
-  gap: 0.8rem;
-  padding: 0.9rem;
+  gap: var(--sp-2);
+  padding: var(--sp-3);
   background: var(--white);
   border: 1px solid var(--line-soft);
 }
@@ -1755,8 +1783,8 @@ button {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 0.8rem;
-  padding-bottom: 0.55rem;
+  gap: var(--sp-2);
+  padding-bottom: var(--sp-2);
   border-bottom: 1px solid var(--line);
   font-family: var(--mono);
   font-size: 9px;
@@ -1765,7 +1793,7 @@ button {
 }
 
 .vd__chip {
-  padding: 0.1rem 0.35rem;
+  padding: 0.1rem var(--sp-1);
   border: 1px solid var(--line-strong);
   font-size: 9px;
   letter-spacing: 0.08em;
@@ -1774,15 +1802,15 @@ button {
 
 .vd__flow {
   display: grid;
-  gap: 0.3rem;
+  gap: var(--sp-1);
 }
 
 .vd__step {
   display: grid;
-  grid-template-columns: 22px minmax(0, 1fr);
-  gap: 0.5rem;
+  grid-template-columns: 24px minmax(0, 1fr);
+  gap: var(--sp-2);
   align-items: baseline;
-  padding: 0.35rem 0.45rem;
+  padding: var(--sp-1) var(--sp-2);
   border-left: 2px solid var(--line);
   background: var(--paper-3);
 }
@@ -1822,7 +1850,7 @@ button {
 }
 
 .vd__meters div {
-  padding: 0.55rem 0.6rem;
+  padding: var(--sp-2) var(--sp-3);
   background: var(--paper);
 }
 
@@ -1832,6 +1860,7 @@ button {
   font-weight: 800;
   letter-spacing: -0.04em;
   color: var(--ink);
+  font-variant-numeric: tabular-nums;
 }
 
 .vd__meters span {
@@ -1844,12 +1873,12 @@ button {
 @media (max-width: 1080px) {
   .opening__grid {
     grid-template-columns: 30px minmax(0, 1fr) minmax(280px, 330px);
-    gap: 1.6rem;
+    gap: var(--sp-6);
   }
 
   .case__btn {
     grid-template-columns: 44px minmax(0, 1.45fr) minmax(0, 1fr) 80px 24px;
-    gap: 0.9rem;
+    gap: var(--sp-3);
   }
 }
 
@@ -1863,7 +1892,7 @@ button {
   }
 
   .opening__aside {
-    padding-top: 1.6rem;
+    padding-top: var(--sp-6);
     padding-left: 0;
     border-left: 0;
     border-top: 1px solid var(--line);
@@ -1879,7 +1908,7 @@ button {
   .shead__grid,
   .contact__intro {
     grid-template-columns: minmax(0, 1fr);
-    gap: 1.2rem;
+    gap: var(--sp-5);
   }
 
   .case__btn {
@@ -1892,7 +1921,7 @@ button {
 
   .casepanel__grid {
     grid-template-columns: minmax(0, 1fr);
-    gap: 1.8rem;
+    gap: var(--sp-7);
   }
 
   .casepanel__aside {
@@ -1938,7 +1967,7 @@ button {
 @media (max-width: 720px) {
   .folio__row {
     grid-template-columns: 1fr auto;
-    gap: 0.6rem 1rem;
+    gap: var(--sp-2) 1rem;
   }
 
   .folio__role,
@@ -1953,7 +1982,7 @@ button {
 
   .facts {
     display: grid;
-    gap: 0.3rem;
+    gap: var(--sp-1);
   }
 
   .facts li + li {
@@ -2001,11 +2030,11 @@ button {
 
 @media (max-width: 620px) {
   :root {
-    --case-pad: 0.85rem;
+    --case-pad: 1rem;
   }
 
   .indexbar__inner {
-    gap: 0.9rem;
+    gap: var(--sp-3);
   }
 
   .indexbar__latin {
@@ -2013,7 +2042,7 @@ button {
   }
 
   .indexbar__nav {
-    gap: 0.85rem;
+    gap: var(--sp-3);
   }
 
   .indexbar__nav a {
@@ -2025,7 +2054,7 @@ button {
   }
 
   .indexbar__actions {
-    padding-left: 0.8rem;
+    padding-left: var(--sp-2);
   }
 
   .case__btn {
@@ -2062,7 +2091,7 @@ button {
   }
 
   .casepanel__grid {
-    padding-top: 1.3rem;
+    padding-top: var(--sp-5);
   }
 
   .tabpanel {
@@ -2113,7 +2142,7 @@ button {
     grid-template-columns: minmax(0, 1fr);
     grid-template-rows: none;
     gap: 0;
-    padding-top: 1.2rem;
+    padding-top: var(--sp-5);
   }
 
   .loop__step {
@@ -2121,8 +2150,8 @@ button {
     display: grid;
     grid-template-columns: 26px 52px minmax(0, 1fr);
     align-items: baseline;
-    gap: 0.5rem;
-    padding: 0.55rem 0.6rem;
+    gap: var(--sp-2);
+    padding: var(--sp-2) var(--sp-2);
     border: 0;
     border-left: 2px solid var(--surface-rule);
     background: transparent;
@@ -2145,8 +2174,8 @@ button {
 
   .loop::after {
     content: '↻ 다시 기획으로';
-    margin-top: 0.4rem;
-    padding-left: 0.6rem;
+    margin-top: var(--sp-2);
+    padding-left: var(--sp-2);
     font-family: var(--mono);
     font-size: 9px;
     letter-spacing: 0.08em;
@@ -2154,7 +2183,7 @@ button {
   }
 
   .loop__foot {
-    margin-top: 0.9rem;
+    margin-top: var(--sp-3);
   }
 
   .stackgrid {
@@ -2166,7 +2195,7 @@ button {
   }
 
   .contact__links {
-    gap: 0.8rem 1.1rem;
+    gap: var(--sp-2) var(--sp-4);
   }
 
   .mailrow__address {
@@ -2174,8 +2203,8 @@ button {
   }
 
   .tab {
-    padding-left: 0.7rem;
-    padding-right: 0.7rem;
+    padding-left: var(--sp-3);
+    padding-right: var(--sp-3);
     font-size: 12px;
   }
 

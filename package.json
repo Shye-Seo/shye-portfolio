@@ -7,8 +7,10 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
+    "build:pages": "tsc --noEmit && vite build --outDir docs --emptyOutDir",
     "preview": "vite preview --port 4173",
-    "deploy:gh-pages": "bash scripts/deploy-gh-pages.sh"
+    "verify": "node scripts/verify.mjs",
+    "contrast": "node scripts/contrast-check.mjs"
   },
   "dependencies": {
     "react": "^18.3.1",

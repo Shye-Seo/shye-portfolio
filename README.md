@@ -1,8 +1,9 @@
 # shye-portfolio
 
 서승혜 — 풀사이클 웹 개발자 포트폴리오.
-Vite + React + TypeScript로 만든 정적 사이트이고, GitHub Pages에 그대로 올릴 수 있게 구성했습니다.
+Vite + React + TypeScript로 만든 정적 사이트이고, GitHub Pages(`main` / `docs`)에 그대로 올라갑니다.
 
+- 라이브: https://shye-seo.github.io/shye-portfolio/
 - 프레임워크: Vite 5 · React 18 · TypeScript(strict)
 - 스타일: 직접 작성한 CSS 디자인 토큰 (프레임워크 없음)
 - 폰트: Paperlogy (눈누 무료 배포, `src/assets/fonts/`)
@@ -28,10 +29,15 @@ Vite + React + TypeScript로 만든 정적 사이트이고, GitHub Pages에 그�
 
 ```bash
 npm install
-npm run dev        # http://localhost:5173
-npm run build      # dist/ 생성 (타입 검사 포함)
-npm run preview    # 빌드 결과 확인 http://localhost:4173
+npm run dev          # http://localhost:5173/shye-portfolio/
+npm run build        # dist/ 생성 (타입 검사 포함, base '/shye-portfolio/')
+npm run preview      # 빌드 결과 확인 http://localhost:4173/shye-portfolio/
+npm run build:pages  # docs/ 생성 — GitHub Pages 배포용 (main / docs)
+npm run verify       # Playwright 화면 검증 + browser/ 스크린샷 (배포 빌드는 PF_URL 사용)
+npm run contrast     # 팔레트 WCAG 대비표
 ```
+
+로컬에서 파일로 바로 열어 확인할 때는 base를 낮춰 빌드합니다: `PF_BASE=./ npm run build`.
 
 ## 3. 내용 고치기
 
@@ -57,38 +63,28 @@ npm run preview    # 빌드 결과 확인 http://localhost:4173
 
 ## 4. 디자인
 
-색·타이포·레이아웃·모션 기준은 [`docs/DESIGN.md`](docs/DESIGN.md)에 정리해 두었습니다.
-요약하면 흰 종이와 쿨그레이 서피스 위에 네이비 차콜 본문, 포인트는 코발트 하나,
-큰 제목과 여백으로 읽는 순서를 만들고, 라틴 라벨만 모노스페이스로 씁니다.
-카드 모서리는 2~3px이고 그림자 대신 헤어라인으로 영역을 나눕니다. 어두운 바탕 면은 쓰지 않습니다.
+색·타이포·레이아웃·모션 기준은 [`design/DESIGN.md`](design/DESIGN.md)에 정리해 두었습니다.
+요약하면 버터 아이보리(`#faf7f0`)와 샌드 서피스(`#f3ede0`) 위에 딥 차콜 본문, 포인트는 딥 앰버 하나(`#a94d07`),
+간격은 4px 격자(`--sp-1` … `--sp-10`), 구획은 1px 헤어라인입니다. 큰 제목과 여백으로 읽는 순서를 만들고,
+라틴 라벨만 모노스페이스로 씁니다. 카드 모서리는 2px이고 그림자·그라데이션 없이 헤어라인으로 영역을 나눕니다.
+어두운 바탕 면은 쓰지 않습니다. 팔레트 대비는 `npm run contrast`로 확인할 수 있습니다.
 
 ## 5. 배포 — GitHub Pages
 
-### 방법 A. GitHub Actions (권장)
+`docs/` 폴더에 빌드 결과를 커밋하고, 저장소 **Settings → Pages**에서
+Source를 `Deploy from a branch` → `main` / `/docs`로 지정합니다.
 
 ```bash
-git init && git add -A && git commit -m "feat: portfolio"
-git branch -M main
-git remote add origin https://github.com/<계정>/shye-portfolio.git
-git push -u origin main
+npm run build:pages               # docs/ 갱신 (base '/shye-portfolio/')
+git add -A && git commit -m "deploy"
+git push origin main
 ```
 
-푸시하면 `.github/workflows/deploy.yml`이 빌드·배포합니다.
-저장소 **Settings → Pages → Source: GitHub Actions** 로 한 번만 지정하면
-`https://<계정>.github.io/shye-portfolio/` 에서 열립니다.
-
-> `vite.config.ts`의 `base: './'` 덕분에 저장소 이름이 달라도, 커스텀 도메인을 붙여도
-> 같은 빌드 결과물이 그대로 동작합니다.
-
-### 방법 B. gh-pages 브랜치로 직접 올리기
-
-워크플로 권한이 없는 계정이라면:
-
-```bash
-npm run deploy:gh-pages
-```
-
-그다음 **Settings → Pages → Source: Deploy from a branch → `gh-pages` / (root)**.
+- `vite.config.ts`의 `base: '/shye-portfolio/'`가 저장소 이름과 배포 경로를 맞춥니다.
+  다른 이름의 저장소로 옮기면 `vite.config.ts`의 base와 저장소 이름을 함께 바꾸세요.
+- `.github/workflows/deploy.yml`은 Actions 권한이 있는 계정에서 쓰는 대체 경로입니다.
+  이 저장소에서는 앱 권한 정책상 워크플로 파일을 푸시할 수 없어 `.gitignore`에 넣어 두었습니다.
+- `npm run deploy:gh-pages`는 `gh-pages` 브랜치로 직접 올리는 세 번째 방법입니다.
 
 ## 6. 구성
 
@@ -102,7 +98,9 @@ src/
                         Reveal · Icons
   lib/                  IntersectionObserver 리빌 · 카운터 훅
   assets/               폰트(Paperlogy) · 라이브 데모 캡처
-docs/DESIGN.md          디자인 시스템 노트
+docs/                   GitHub Pages 배포 산출물 (npm run build:pages 결과)
+design/DESIGN.md        디자인 시스템 노트
+design/screenshots/     최종 렌더 화면 기록
 public/og.png           1200×630 소셜 카드
 ```
 
@@ -111,7 +109,7 @@ public/og.png           1200×630 소셜 카드
 `npm run build`(TypeScript strict + Vite) 통과 후, Playwright로 데스크톱(1440×900)과
 모바일(390×844)을 실제 렌더해 **24개 항목**을 확인했습니다(`node scripts/verify.mjs` → 24/24 통과).
 
-- 320~1920px 사이 23개 폭에서 가로 스크롤 없음, 본문 대비 4.5:1 이상(76개 요소 검사)
+- 320~1920px 사이 23개 폭에서 가로 스크롤 없음, 본문 대비 4.5:1 이상(76개 요소 검사, 최저 5.23:1)
 - 어두운 바탕 면 없음 — 모든 면이 밝음(L≥0.7)
 - 수치 표기(1,702 · 640 · 751 · 255 · 56)와 네이버 메일 주소 유지
 - 케이스 4개, `FAQ`·자주 묻는 문구 없음, 색인 → 케이스 아코디언 구조·8칸 벤토·탭 3개 유지
@@ -128,7 +126,7 @@ public/og.png           1200×630 소셜 카드
 
 ## 8. 화면 기록
 
-`docs/screenshots/` 에 최종 렌더 결과를 남겨 두었습니다.
+`design/screenshots/`에 최종 렌더 결과를 남겨 두었습니다.
 
 - `desktop-hero.jpg` — 데스크톱 1440×900 표지
 - `desktop-full.jpg` — 데스크톱 전체 페이지
