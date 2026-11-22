@@ -97,7 +97,7 @@ export function Contact() {
         <div className="contact__foot">
           <p className="contact__status">
             <IconCheckCircle size={13} />
-            인터뷰·협업 제안 환영 · 부산
+            이메일로 부탁드립니다.
           </p>
           <nav className="contact__links" aria-label="바로가기">
             {CONTACT.links.map((link) => (
