@@ -128,6 +128,11 @@ const lumOfCss = `
       '.side__links a', '.boundary__title', '.boundary__list li', '.boundary__note',
       '.contact__label', '.contact__title', '.contact__body', '.mailrow__address',
       '.contact__status', '.contact__links a', '.footer__row', '.vd__head', '.vd__chip',
+      '.employer__name', '.employer__alias', '.employer__fact dt', '.employer__fact dd',
+      '.employer__summary', '.employer__stack li', '.employer__note',
+      '.ct__no', '.ct__name', '.ct__kicker', '.ct__role', '.ct__body', '.ct__points li',
+      '.also__title', '.also__item',
+      '.contrib__label', '.contrib__title', '.contrib__list li',
       '.vd__label', '.vd__label em', '.vd__meters b', '.vd__meters span',
     ];
 
@@ -184,7 +189,7 @@ const lumOfCss = `
       base.L = rel(base.r, base.g, base.b);
       return base;
     };
-    return ['.case.is-open .case__btn', '.bcell--loop', '.bcell', '.casepanel', '.indexbar', '.approach', '.contact', '.opening', 'body'].map((sel) => {
+    return ['.case.is-open .case__btn', '.bcell--loop', '.bcell', '.casepanel', '.indexbar', '.approach', '.career', '.contact', '.opening', 'body'].map((sel) => {
       const el = document.querySelector(sel);
       if (!el) return { sel, missing: true };
       const c = eff(el);
@@ -212,6 +217,18 @@ const lumOfCss = `
   );
   ok('메일 주소 seounghye95@naver.com 유지', text.includes('seounghye95@naver.com'));
   ok('케이스 4개', (await page.locator('.case').count()) === 4);
+  ok(
+    '경력 항목 4건 — 카페24 첫구매 100원 · 기프틴 · 인스타 위젯 · 럭키딜',
+    (await page.locator('.career .ct').count()) === 4 &&
+      ['카페24 첫구매 100원', '기프틴', '고도몰 인스타쇼핑위젯', '럭키딜'].every((v) => text.includes(v)),
+    `${await page.locator('.career .ct').count()}건`,
+  );
+  ok('경력 섹션에 회사(채티스) 정보', text.includes('주식회사 채티스') && text.includes('SellingStorm'));
+  ok(
+    '컨택트에 기여 포인트·협업 방식 명시',
+    text.includes('바로 맡을 수 있는 일') && text.includes('일하는 방식'),
+  );
+  ok('섹션 색인 4항목(작업·경력·방식·연락)', (await page.locator('.indexbar__nav a').count()) === 4);
   ok('FAQ 없음', !/FAQ|자주 묻는/.test(text));
   ok('색인 → 케이스 아코디언 구조 유지', (await page.locator('.cases').count()) === 1);
   ok('12칸 벤토 유지', (await page.locator('.bento > .bcell').count()) === 8, `${await page.locator('.bento > .bcell').count()}개 칸`);
@@ -280,13 +297,16 @@ const lumOfCss = `
   const mailtos = await page.locator('a[href^="mailto:"]').count();
   ok('네이버 메일 mailto 링크 4곳', mailtos === 4, `${mailtos}곳`);
 
-  const loaded = await page.evaluate(() => [...document.images].map((i) => i.naturalWidth > 0));
-  ok('이미지 4장 로드', loaded.length === 4 && loaded.every(Boolean), `${loaded.length}장`);
-
   ok('스크롤 전 색인 바 숨김', !(await page.locator('.indexbar').isVisible()));
   await page.evaluate(() => window.scrollTo(0, document.getElementById('approach').offsetTop));
   await page.waitForTimeout(600);
   ok('스크롤 후 색인 바 표시', await page.locator('.indexbar').isVisible());
+
+  // 지연 로드 이미지까지 모두 받도록 끝까지 내렸다가 올린다
+  await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+  await page.waitForTimeout(1200);
+  const loaded = await page.evaluate(() => [...document.images].map((i) => i.naturalWidth > 0));
+  ok('이미지 4장 로드', loaded.length === 4 && loaded.every(Boolean), `${loaded.length}장 · ${loaded.map((v) => (v ? 'ok' : 'fail')).join(',')}`);
 
   const copyBtn = page.locator('button', { hasText: '주소 복사' }).first();
   await copyBtn.scrollIntoViewIfNeeded();
@@ -327,6 +347,10 @@ const lumOfCss = `
   await page.waitForTimeout(900);
   await page.screenshot({ path: `${OUT}/pf-v5-desktop-work.png` });
 
+  await page.evaluate(() => window.scrollTo(0, document.getElementById('career').offsetTop - 60));
+  await page.waitForTimeout(900);
+  await page.screenshot({ path: `${OUT}/pf-v5-desktop-career.png` });
+
   // 지표 카운터를 먼저 끝까지 돌린 뒤 벤토 첫 화면으로 돌아와 찍는다
   await page.evaluate(() => window.scrollTo(0, document.getElementById('approach').offsetTop + 520));
   await page.waitForTimeout(2000);
@@ -357,10 +381,15 @@ const lumOfCss = `
   await page.close();
 }
 
-// ── 7. og.png (1200×630) 재생성
+// ── 7. og.png (1200×630) 재생성 — 소셜 카드는 표지의 이름·직함·제목·소개문만 담는다
 {
   const page = await open(1200, 630);
-  await page.waitForTimeout(700);
+  await page.evaluate(() => {
+    document.querySelectorAll('.index, .opening__note').forEach((el) => {
+      el instanceof HTMLElement && (el.style.display = 'none');
+    });
+  });
+  await page.waitForTimeout(500);
   await page.screenshot({ path: path.join(ROOT, 'public/og.png') });
   await page.close();
 }

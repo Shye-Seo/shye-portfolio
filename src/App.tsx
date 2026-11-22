@@ -4,6 +4,7 @@ import { PROJECTS } from './content';
 import { Nav } from './components/Nav';
 import { Opening } from './components/Opening';
 import { CaseWorkspace } from './components/CaseWorkspace';
+import { Career } from './components/Career';
 import { Bento } from './components/Bento';
 import { Contact, Footer } from './components/Contact';
 
@@ -19,6 +20,7 @@ export default function App() {
       <main>
         <Opening onSelect={setActiveCase} />
         <CaseWorkspace activeId={activeCase} onChange={setActiveCase} />
+        <Career />
         <Bento />
         <Contact />
       </main>

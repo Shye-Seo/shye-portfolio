@@ -54,6 +54,27 @@ export function Contact() {
           <p className="contact__body">{CONTACT.body}</p>
         </div>
 
+        <div className="contrib">
+          <div className="contrib__col">
+            <p className="contrib__label">{CONTACT.contribute.label}</p>
+            <h3 className="contrib__title">{CONTACT.contribute.title}</h3>
+            <ul className="contrib__list">
+              {CONTACT.contribute.items.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          </div>
+          <div className="contrib__col">
+            <p className="contrib__label">{CONTACT.manner.label}</p>
+            <h3 className="contrib__title">{CONTACT.manner.title}</h3>
+            <ul className="contrib__list">
+              {CONTACT.manner.items.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
         <div className="mailrow">
           <a className="mailrow__address" href={`mailto:${CONTACT_EMAIL}`}>
             {CONTACT_EMAIL}
